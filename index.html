@@ -1,464 +1,1157 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
   <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Jianshu Zhang</title>
+    <meta name="description" content="Personal homepage of Jianshu Zhang, a CS Ph.D. student at Northwestern University.">
+    <meta name="color-scheme" content="light dark">
+    <title>Jianshu Zhang | Northwestern University</title>
     <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;1,500;1,600&family=Ubuntu+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.4/css/academicons.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <script>
+      (() => {
+        let savedTheme = null;
+        try {
+          savedTheme = localStorage.getItem("theme");
+        } catch {
+          savedTheme = null;
+        }
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        document.documentElement.dataset.theme = savedTheme || (prefersDark ? "dark" : "light");
+      })();
+    </script>
     <style>
+      :root {
+        color-scheme: light;
+        --bg: #ffffff;
+        --text: #595959;
+        --muted: #828282;
+        --strong: #222222;
+        --heading: #2f174f;
+        --link: #2f174f;
+        --link-hover: #1f0f35;
+        --rule: #e5e5e5;
+        --soft: #f7f5fa;
+        --accent: #8f7caf;
+        --danger: #d33f32;
+        --image-bg: #ffffff;
+        --teaser-frame: #ded8e9;
+        --teaser-bg: #f8fafc;
+        --floating-bg: rgba(255, 255, 255, 0.9);
+        --shadow: 0 6px 18px rgba(47, 23, 79, 0.14);
+      }
+
+      :root[data-theme="dark"] {
+        color-scheme: dark;
+        --bg: #120c1d;
+        --text: #d8d2df;
+        --muted: #a89cb8;
+        --strong: #f4efff;
+        --heading: #d7c4ff;
+        --link: #d7c4ff;
+        --link-hover: #ffffff;
+        --rule: #352747;
+        --soft: #21162f;
+        --accent: #9f8bc4;
+        --danger: #ff8a80;
+        --image-bg: #ffffff;
+        --teaser-frame: #4a385f;
+        --teaser-bg: #1b1228;
+        --floating-bg: rgba(18, 12, 29, 0.88);
+        --shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+      }
+
       * {
         box-sizing: border-box;
       }
 
-      html,
-      body {
-        min-height: 100%;
+      html {
+        scroll-behavior: smooth;
       }
 
       body {
-        background: linear-gradient(to right, #191129 0%, #2d1c47 100%);
-        color: rgba(255, 255, 255, 0.9);
-        font-family: "Georgia", serif;
-        font-size: 18px;
         margin: 0;
-        line-height: 1.7;
-      }
-
-      .page-shell {
-        display: flex;
-        min-height: 100vh;
-        margin: 0 auto;
-        width: 100%;
-        padding: 70px 90px;
-        gap: 40px;
-      }
-
-      @media only screen and (max-width: 1100px) {
-        .page-shell {
-          flex-direction: column;
-          padding: 60px 60px;
-        }
-
-        header {
-          width: 100%;
-        }
-      }
-
-      @media only screen and (max-width: 600px) {
-        .page-shell {
-          padding: 45px 28px;
-        }
+        background: var(--bg);
+        color: var(--text);
+        font: 18px/1.5 "Crimson Pro", Georgia, serif;
+        font-weight: 400;
+        transition: background-color 0.18s ease, color 0.18s ease;
       }
 
       a {
-        color: #c9a7ff;
+        color: var(--link);
         text-decoration: none;
-        transition: color 0.3s ease, border-color 0.3s ease;
       }
 
       a:hover,
       a:focus {
-        color: #f3e5ff;
+        color: var(--link-hover);
+        text-decoration: none;
+      }
+
+      img {
+        max-width: 100%;
+      }
+
+      strong {
+        color: var(--strong);
+        font-weight: 600;
       }
 
       p,
-      span,
+      ul,
+      ol,
+      table,
+      pre,
+      dl {
+        margin: 0 0 20px;
+      }
+
+      ul {
+        padding-left: 1.2em;
+      }
+
       li {
-        color: rgba(255, 255, 255, 0.9);
-        font-size: 1.12em;
+        margin-bottom: 0.25rem;
       }
 
       h1,
       h2,
-      h3 {
-        color: #ffffff;
-        font-weight: bold;
+      h3,
+      h4 {
+        color: var(--heading);
+        font-weight: 500;
+        line-height: 1.1;
       }
-
-      .name-heading {
-        font-size: 2.2em;
-        margin-bottom: 0.7em;
-        white-space: nowrap;
-      }
-
 
       h1 {
-        font-size: 2.2em;
-        margin-bottom: 0.75em;
+        font-size: 30px;
+        margin: 0 0 16px;
       }
 
       h2 {
-        font-size: 1.7em;
-        margin-top: 2.6em;
-        margin-bottom: 1.1em;
+        font-size: 29px;
+        margin: 2px 0 15px;
       }
 
-      strong {
-        color: #ffffff;
+      h3 {
+        font-size: 22px;
+        margin: 28px 0 12px;
       }
 
-      .highlight-red {
-        color: #ff4d5a;
-        font-weight: 700;
+      h4 {
+        font-size: 19px;
+        margin: 0 0 8px;
       }
 
-      ul {
-        padding-left: 1.1rem;
-      }
-
-      ul li {
-        margin-bottom: 0.6rem;
+      .wrapper {
+        display: grid;
+        grid-template-columns: 250px minmax(0, 690px);
+        gap: 70px;
+        width: min(100%, 1040px);
+        margin: 0 auto;
+        padding: 64px 24px 72px;
       }
 
       header {
-        width: 320px;
-        padding: 0;
-        text-align: left;
-        flex-shrink: 0;
+        position: sticky;
+        top: 52px;
+        align-self: start;
+        text-align: center;
+        -webkit-font-smoothing: subpixel-antialiased;
       }
 
-      header img {
-        width: 100%;
-        border-radius: 12px;
-        margin-bottom: 24px;
-        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+      .avatar {
+        display: inline-block;
+        width: 145px;
+        height: 145px;
+        margin: 0 auto 18px;
+        border-radius: 50%;
+        overflow: hidden;
+        box-shadow: var(--shadow);
       }
 
-      header p {
-        margin-bottom: 22px;
-      }
-
-      header ul {
-        list-style: none;
-        padding: 0;
-      }
-
-      nav ul {
-        list-style: none;
-        padding: 0;
-        margin: 0 0 20px;
-      }
-
-      nav ul li {
+      .avatar img {
         display: block;
-        margin-bottom: 12px;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .name {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        min-height: 1.15em;
+        cursor: default;
+        text-align: center;
+      }
+
+      .name span {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        white-space: nowrap;
+        transition: opacity 0.2s ease;
+      }
+
+      .name .cn {
+        opacity: 0;
+        font-family: "KaiTi", "Kaiti SC", "STKaiti", serif;
+      }
+
+      .name:hover .en {
+        opacity: 0;
+      }
+
+      .name:hover .cn {
+        opacity: 1;
+      }
+
+      .profile-line {
+        display: block;
+        margin-bottom: 2px;
+        font-size: 1.08rem;
+      }
+
+      email {
+        display: inline-block;
+        margin-top: 6px;
+        font-family: "Ubuntu Mono", ui-monospace, monospace;
+        font-size: 14px;
+      }
+
+      .social-icons {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin: 24px 0 18px;
+      }
+
+      .social-icons a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        color: var(--heading);
+        font-size: 1.12rem;
+        transition: color 0.15s ease, transform 0.15s ease, background-color 0.15s ease;
+      }
+
+      .social-icons a:hover {
+        background: var(--soft);
+        color: var(--link-hover);
+        transform: translateY(-1px) scale(1.08);
+      }
+
+      .theme-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        top: 22px;
+        right: 26px;
+        z-index: 20;
+        width: 38px;
+        height: 38px;
+        border: 1px solid var(--rule);
+        border-radius: 50%;
+        background: var(--floating-bg);
+        color: var(--heading);
+        cursor: pointer;
+        font-size: 0.95rem;
+        line-height: 1;
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(10px);
+        transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
+      }
+
+      .theme-toggle:hover {
+        background: var(--soft);
+        border-color: var(--accent);
+        color: var(--link-hover);
+        transform: translateY(-1px);
+      }
+
+      .theme-toggle .sun-icon {
+        display: none;
+      }
+
+      :root[data-theme="dark"] .theme-toggle .moon-icon {
+        display: none;
+      }
+
+      :root[data-theme="dark"] .theme-toggle .sun-icon {
+        display: inline-block;
+      }
+
+      .site-nav {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+        margin-top: 0.5rem;
+        text-align: left;
+        font-size: 1rem;
+      }
+
+      .site-nav a {
+        color: inherit;
+        padding-left: 0.65rem;
+        border-left: 2px solid transparent;
+        transition: color 0.15s ease, border-color 0.15s ease;
+      }
+
+      .site-nav a:hover {
+        color: var(--link-hover);
+        border-left-color: var(--accent);
+      }
+
+      .site-nav a.active {
+        border-left-color: var(--heading);
+        color: var(--heading);
         font-weight: 600;
       }
 
-      nav ul li a {
-        font-size: 1.05em;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
+      main {
+        min-width: 0;
       }
 
-      .contact {
-        list-style: none;
-        margin: 1.5rem 0 0;
-        padding: 0;
+      section {
+        scroll-margin-top: 28px;
       }
 
-      .contact li {
-        margin-bottom: 0.55rem;
-        font-size: 1.08em;
-      }
-
-      .content {
-        flex: 1;
-        font-size: 1.05em;
-      }
-
-      @media only screen and (max-width: 600px) {
-        .content {
-          margin-left: 0;
-          margin-top: 50px;
-          padding: 40px 0 60px;
-          border-top: 1px solid rgba(255, 255, 255, 0.18);
-          max-width: 100%;
-        }
-      }
-
-      .content article + article {
-        margin-top: 2.5em;
-      }
-
-      .content article:first-of-type h2 {
-        margin-top: 1em;
-      }
-
-      .content p {
-        margin-bottom: 1.2em;
-      }
-
-      .content ul {
-        margin-top: 0.5em;
+      .intro strong {
+        color: var(--heading);
       }
 
       .news-list {
+        margin-bottom: 4px;
+      }
+
+      .news-list strong:first-child,
+      .news-more strong:first-child {
+        color: var(--strong);
+        white-space: nowrap;
+      }
+
+      .highlight-red {
+        color: var(--danger);
+        font-weight: 600;
+      }
+
+      details.news-more {
+        margin-top: -8px;
+        margin-bottom: 24px;
+      }
+
+      details.news-more > summary {
+        display: inline-block;
+        color: var(--muted);
+        cursor: pointer;
+        font-size: 0.95rem;
         list-style: none;
-        padding: 0;
-        margin: 0;
-        max-height: 320px;
-        overflow-y: auto;
-        padding-right: 8px;
       }
 
-      .news-list::-webkit-scrollbar {
-        width: 6px;
+      details.news-more > summary::-webkit-details-marker {
+        display: none;
       }
 
-      .news-list::-webkit-scrollbar-track {
-        background: rgba(255, 255, 255, 0.08);
-        border-radius: 4px;
+      details.news-more > summary::before {
+        content: "\25B8";
+        margin-right: 0.4rem;
       }
 
-      .news-list::-webkit-scrollbar-thumb {
-        background: rgba(255, 255, 255, 0.3);
-        border-radius: 4px;
+      details.news-more[open] > summary::before {
+        content: "\25BE";
       }
 
-      .news-list li {
-        margin-bottom: 0.55em;
+      details.news-more > summary:hover {
+        color: var(--link-hover);
+      }
+
+      .year-index {
         display: flex;
         flex-wrap: wrap;
-        column-gap: 0.6rem;
+        gap: 0.5rem;
+        margin: 8px 0 14px;
+        font-size: 0.9rem;
       }
 
-      .news-date {
-        font-weight: 600;
+      .year-index a {
+        display: inline-block;
+        padding: 0.12rem 0.6rem;
+        border: 1px solid var(--heading);
+        border-radius: 4px;
+        color: var(--heading);
+        line-height: 1.35;
+        white-space: nowrap;
+      }
+
+      .year-index a:hover {
+        background: var(--heading);
         color: #ffffff;
-        min-width: 5rem;
-        font-size: 1.05em;
       }
 
-      .publication-entry {
-        padding-bottom: 1em;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-        margin-bottom: 0.8em;
+      .publications {
+        margin-top: 1rem;
       }
 
-      .publication-entry:last-child {
-        border-bottom: none;
-        margin-bottom: 0;
-        padding-bottom: 0.5em;
+      .publications h3.year {
+        color: var(--muted);
+        border-top: 1px solid var(--rule);
+        margin: 26px 0 4px;
+        padding-top: 8px;
+        text-align: right;
+      }
+
+      .bibliography {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .bibliography li {
+        margin: 0 0 18px;
+      }
+
+      .pub-row {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .abbr {
+        position: relative;
+        flex: 0 0 210px;
+      }
+
+      .teaser,
+      .teaser-placeholder {
+        display: block;
+        width: 210px;
+        aspect-ratio: 16 / 10;
+        border-radius: 8px;
+        box-shadow: var(--shadow);
+      }
+
+      .teaser {
+        background: var(--image-bg);
+        object-fit: contain;
+      }
+
+      .teaser-placeholder {
+        display: grid;
+        place-items: center;
+        border: 1px solid var(--teaser-frame);
+        background:
+          linear-gradient(135deg, rgba(47, 23, 79, 0.11), rgba(143, 124, 175, 0.22)),
+          var(--teaser-bg);
+        color: var(--heading);
+        font-size: 1.35rem;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+      }
+
+      .badge {
+        position: absolute;
+        top: 8px;
+        left: 10px;
+        display: inline-block;
+        padding: 0.2em 0.55em;
+        border-radius: 3px;
+        background: var(--heading);
+        color: #ffffff;
+        font-size: 0.72rem;
+        font-weight: 700;
+        line-height: 1.1;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+        white-space: nowrap;
+      }
+
+      .pub-content {
+        min-width: 0;
+        flex: 1;
       }
 
       .publication-title {
-        font-size: 1.18em;
-        font-weight: 600;
-        margin-bottom: 0.35em;
+        margin-bottom: 3px;
+        color: var(--strong);
+        font-size: 1.02rem;
+        font-weight: 700;
+        line-height: 1.25;
+        overflow-wrap: anywhere;
       }
 
       .publication-authors,
-      .publication-venue {
-        color: rgba(255, 255, 255, 0.8);
-        font-size: 1.02em;
-        margin-bottom: 0.25em;
+      .publication-venue,
+      .publication-note {
+        margin-bottom: 3px;
+        font-size: 0.96rem;
+        line-height: 1.35;
+        overflow-wrap: anywhere;
       }
 
       .publication-venue {
         font-style: italic;
       }
 
-      article ul {
-        list-style: disc;
+      .publication-note {
+        color: var(--danger);
+        font-weight: 600;
       }
 
-      article ul li {
-        display: list-item;
+      .links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        margin-top: 7px;
       }
 
+      .btn {
+        display: inline-block;
+        border: 1px solid var(--strong);
+        border-radius: 3px;
+        padding: 0.08rem 0.5rem 0.12rem;
+        color: var(--strong);
+        font-size: 0.72rem;
+        line-height: 1.3;
+      }
+
+      .btn:hover {
+        border-color: var(--link-hover);
+        color: var(--link-hover);
+      }
+
+      .compact-list {
+        margin-top: -0.25rem;
+      }
+
+      footer {
+        margin-top: 36px;
+        padding-top: 18px;
+        border-top: 1px solid var(--rule);
+        color: var(--muted);
+        font-size: 0.86rem;
+      }
+
+      @media (max-width: 960px) {
+        body {
+          padding: 15px;
+          word-wrap: break-word;
+        }
+
+        .theme-toggle {
+          top: 14px;
+          right: 14px;
+        }
+
+        .wrapper {
+          display: block;
+          width: auto;
+          padding: 0;
+        }
+
+        header {
+          position: static;
+          padding: 8px 0 18px;
+        }
+
+        .site-nav {
+          display: none;
+        }
+
+        main {
+          border: 1px solid var(--rule);
+          border-width: 1px 0;
+          padding: 20px 0;
+        }
+
+        .avatar {
+          width: 118px;
+          height: 118px;
+        }
+      }
+
+      @media (max-width: 640px) {
+        body {
+          font-size: 17px;
+        }
+
+        h1 {
+          font-size: 28px;
+        }
+
+        h2 {
+          font-size: 26px;
+        }
+
+        .pub-row {
+          display: block;
+        }
+
+        .pub-content {
+          width: 100%;
+        }
+
+        .abbr {
+          width: 100%;
+          margin-bottom: 10px;
+        }
+
+        .teaser,
+        .teaser-placeholder {
+          width: min(100%, 340px);
+        }
+
+        .publications h3.year {
+          text-align: left;
+        }
+
+        .year-index a {
+          flex: 1 1 auto;
+          min-width: 90px;
+          text-align: center;
+        }
+      }
     </style>
   </head>
+
   <body>
-    <div class="page-shell">
+    <button class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+      <i class="fa-solid fa-moon moon-icon" aria-hidden="true"></i>
+      <i class="fa-solid fa-sun sun-icon" aria-hidden="true"></i>
+    </button>
+
+    <div class="wrapper">
       <header>
-      <img alt="Portrait of <strong>Jianshu Zhang</strong>" src="images/hawaii.jpg">
-      <h1><strong>Jianshu Zhang</strong></h1>
-      <p>
-        CS Ph.D. student at Northwestern University.
-      </p>
-      <ul class="contact">
-        <li>sterzhang [at] u.northwestern.edu</li>
-        <li>Evanston, IL, USA</li>
-        <li><a href="https://twitter.com/SterZhang">Twitter</a></li>
-        <li><a href="https://github.com/sterzhang">GitHub</a></li>
-        <li><a href="https://scholar.google.com/citations?user=52dkNnkAAAAJ&amp;hl=en">Google Scholar</a></li>
-      </ul>
-    </header>
+        <a class="avatar" href="#about-me" aria-label="Jianshu Zhang homepage">
+          <img src="images/hawaii.jpg" alt="Portrait of Jianshu Zhang">
+        </a>
 
-    <section class="content">
-      <article id="about">
-        <h2>About Me</h2>
-        <p>
-          Hi! I’m <strong>Jianshu Zhang (张鉴殊)</strong>, a first-year CS Ph.D. student at Northwestern University.
-          My research focuses on building multimodal and agentic AI systems that are truly ready to understand, reason about, and act in the interactive and physical world. Feel free to reach out if you’d like to chat.
-        </p>
-      </article>
+        <h1 class="name">
+          <span class="en">Jianshu Zhang</span>
+          <span class="cn">张鉴殊</span>
+        </h1>
 
-      <!-- <article id="research">
-        <h2>Research Interests</h2>
-        <p>How VLMs can truly step into our world?</p>
-        <ul>
-          <li><strong>Where are the bottlenecks?</strong> VLMs inherit language-model data biases: text corpora are abundant, high-quality multimodal corpora are scarce. To address this imbalance, I pursue <em>data-centric</em> approaches that automatically curate rich, high-quality multimodal data so models gain the grounding they lack.</li>
-          <li><strong>How should VLMs learn?</strong> Vision signals are continuous and environments are dynamic, making alignment difficult. Rather than relying on static training signals, I focus on <em>context-sensitive multimodal learning</em> so VLMs can adapt their behavior to diverse settings through in-context cues.</li>
-          <li><strong>How can VLMs interact with the physical world?</strong> Moving from perception to action requires more than recognition — VLMs need to understand spatial structure and leverage past experience. With this goal, I study <em>spatial intelligence</em> and <em>memory-driven action planning</em> so VLM-based agents can translate self-exploration into meaningful actions while navigating real spaces.</li>
-        </ul>
-      </article> -->
+        <span class="profile-line">CS Ph.D. Student</span>
+        <a class="profile-line" href="https://www.northwestern.edu/" target="_blank" rel="noopener noreferrer">Northwestern University</a>
+        <email>sterzhang [at] u.northwestern.edu</email>
 
-      <article id="news">
-        <h2>News</h2>
-        <ul class="news-list">
-          <li><span class="news-date">2026.05</span> <a href="https://sterzhang.github.io/SpaceNum-Home/" target="_blank" rel="noopener noreferrer">SpaceNum</a>
-            was released, revisiting the spatial-numerical understanding in VLMs.</li>
-          <li><span class="news-date">2026.05</span> ProgressLM was selected as <strong class="highlight-red">Oral</strong> in ACL 2026.</li>
-          <li><span class="news-date">2026.05</span> I was selected as a <strong>Silver Reviewer</strong> in ICML 2026.</li>
-          <li><span class="news-date">2026.04</span> AdvEvo-MARL was accepted to <strong>ICML 2026</strong>.</li>
-          <li><span class="news-date">2026.04</span> ProgressLM and COREWeaver were accepted to <strong>ACL 2026 (Main)</strong>.</li>
-          <li><span class="news-date">2026.01</span> MindCube was accepted to <strong>ICLR 2026</strong>.</li>
-          <li>
-            <span class="news-date">2026.01</span>
-            <a href="https://progresslm.github.io/ProgressLM/" target="_blank" rel="noopener noreferrer">ProgressLM</a>
-            was released, probing how well VLMs reasoning in progress.
-          </li>
-          <li><span class="news-date">2025.09</span> Honored to receive <strong>McCormick School of Engineering Fellowship</strong> from Northwestern University.</li>  
-          <li><span class="news-date">2025.09</span> Joined <strong>Northwestern University</strong> as a Ph.D. student in Computer Science.</li>
-          <li><span class="news-date">2025.08</span> Evo-MARL and FairReason were accepted to <strong>T2FM@ICCV 2025</strong>.</li>
-          <li><span class="news-date">2025.08</span> WebCoT was accepted to <strong>EMNLP 2025 (Findings)</strong> and <strong>AIA@COLM 2025</strong>.</li>
-          <li><span class="news-date">2025.06</span> MultiVerse was accepted to <strong>ICCV 2025</strong>.</li>
-          <li><span class="news-date">2025.06</span> 🎓 Graduated with a B.E. degree and selected as <strong>Outstanding Undergraduate</strong>.</li>
-          <li><span class="news-date">2025.05</span> VLM2-Bench was accepted to <strong>ACL 2025 (Main)</strong>, and Bridge-Coder to <strong>ACL 2025 (Findings)</strong>.</li>
-          <li><span class="news-date">2025.05</span> Honored with the <strong>Lei Jun Computer Breakthrough Award</strong> (50K RMB).</li>
-          <li><span class="news-date">2025.05</span> CAN was accepted to <strong>ICML 2025</strong>.</li>
-          <li><span class="news-date">2025.01</span> PVIT was accepted to <strong>ICLR 2025</strong>.</li>
-          <li><span class="news-date">2024.11</span> PVIT-3M dataset ranked Top 3 in downloads on Hugging Face.</li>
-          <li><span class="news-date">2024.10</span> Awarded the <strong>National Scholarship</strong> (top 0.2% nationally).</li>
-          <li><span class="news-date">2024.09</span> Image Textualization accepted to <strong>NeurIPS 2024 (D&amp;B)</strong>.</li>
-          <li><span class="news-date">2024.09</span> MLLM-Protector and FIRST accepted to <strong>EMNLP 2024 (Main)</strong>.</li>
-          <li><span class="news-date">2024.03</span> CORE accepted to <strong>CogSci 2024</strong> (<span class="highlight-red">Oral</span>).</li>
-          <li><span class="news-date">2023.12</span> FuzzLLM accepted to <strong>ICASSP 2024</strong>.</li>
-        </ul>
-      </article>
-
-      <article id="publications">
-        <h2>Publications</h2>
-        <div class="publication-entry">
-          <p class="publication-title"><a href="https://arxiv.org/pdf/2605.23898">SpaceNum: Revisiting Spatial Numerical
-          Understanding in VLMs</a></p>
-          <p class="publication-authors"><strong>Jianshu Zhang*</strong>, Yijiang Li*, Huifeixin Chen, Haoran Lu, Letian Xue, Bingyang Wang, Han Liu</p>
-          <p class="publication-venue">New Released; <a href="https://sterzhang.github.io/SpaceNum-Home/" target="_blank" rel="noopener noreferrer">Project Page</a></p>
-          <!-- <p class="publication-venue">ACL 2026 (Main) (<strong>Oral</strong>);  ICLR 2026 Workshop on World Models</p> -->
+        <div class="social-icons" aria-label="Social links">
+          <a href="https://scholar.google.com/citations?user=52dkNnkAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer" aria-label="Google Scholar">
+            <i class="ai ai-google-scholar" aria-hidden="true"></i>
+          </a>
+          <a href="https://github.com/sterzhang" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <i class="fa-brands fa-github" aria-hidden="true"></i>
+          </a>
+          <a href="https://twitter.com/SterZhang" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+            <i class="fa-brands fa-x-twitter" aria-hidden="true"></i>
+          </a>
         </div>
 
-        <div class="publication-entry">
-          <p class="publication-title"><a href="https://arxiv.org/pdf/2601.15224">PROGRESSLM: Towards Progress Reasoning in Vision-Language Models</a></p>
-          <p class="publication-authors"><strong>Jianshu Zhang*</strong>, Chengxuan Qian*, Haosen Sun, Haoran Lu, Dingcheng Wang, Letian Xue, Han Liu</p>
-          <p class="publication-venue">New Released; <a href="https://progresslm.github.io/ProgressLM/" target="_blank" rel="noopener noreferrer">Project Page</a></p>
-          <p class="publication-venue">ACL 2026 (Main) (<strong class="highlight-red">Oral</strong>);  ICLR 2026 Workshop on World Models</p>
-        </div>
+        <nav class="site-nav" aria-label="Section navigation">
+          <a href="#about-me">About</a>
+          <a href="#research-interests">Research</a>
+          <a href="#news">News</a>
+          <a href="#publications">Publications</a>
+          <a href="#awards">Awards</a>
+          <a href="#education">Education</a>
+        </nav>
+      </header>
 
-        <div class="publication-entry">
-          <p class="publication-title"><a href="https://arxiv.org/abs/2502.12084">VLM2-Bench: A Closer Look at How Well VLMs Implicitly Link Explicit Matching Visual Cues</a></p>
-          <p class="publication-authors"><strong>Jianshu Zhang*</strong>, Dongyu Yao*, Renjie Pi, Paul Pu Liang, Yiren Fung</p>
-          <p class="publication-venue">ACL 2025 (Main)</p>
-        </div>
+      <main>
+        <section id="about-me">
+          <h2>About Me</h2>
+          <p class="intro">
+            Hi! I’m <strong>Jianshu Zhang (张鉴殊)</strong>, a first-year CS Ph.D. student at
+            <strong>Northwestern University</strong>. My research focuses on building multimodal and
+            agentic AI systems that are truly ready to understand, reason about, and act in the
+            interactive and physical world. Feel free to reach out if you’d like to chat.
+          </p>
+        </section>
 
-        <div class="publication-entry">
-          <p class="publication-title"><a href="https://arxiv.org/abs/2506.21458">Spatial Mental Modeling from Limited Views</a></p>
-          <p class="publication-authors">Baiqiao Yin, Qineng Wang, Pingyue Zhang, <strong>Jianshu Zhang</strong>, Kangrui Wang, Zihan Wang, Jieyu Zhang, Keshigeyan Chandrasegaran, Han Liu, Ranjay Krishna, Saining Xie, Manling Li, Jiajun Wu, Li Fei-Fei</p>
-          <p class="publication-venue">ICLR 2026; ICCV 2025 Workshop SP4V (<strong class="highlight-red">Best Paper Award</strong>)</p>
-        </div>
+        <section id="research-interests">
+          <h2>Research Interests</h2>
+          <p>How can large vision-language models truly step into our world?</p>
+          <ul>
+            <li><strong>Safe and diverse behavior:</strong> before VLMs act in open environments, they need to remain safe, reliable, and robust across diverse users, contexts, and failure modes.</li>
+            <li><strong>Clear visual perception:</strong> VLMs must see the world precisely, preserving fine-grained perception and visual grounding instead of relying mainly on language priors.</li>
+            <li><strong>Spatial and physical intelligence:</strong> beyond recognizing images, VLMs should build spatial mental models, reason about unseen or interactive environments, and connect perception to physical action.</li>
+          </ul>
+        </section>
 
-        <div class="publication-entry">
-          <p class="publication-title"><a href="https://arxiv.org/pdf/2510.14438">COREWeaver: Enhancing COmpositional REasoning Capabilities of Deep Research Agent Foundation Models</a></p>
-          <p class="publication-authors">Rui Wang, Ce Zhang, Jun-Yu Ma, <strong>Jianshu Zhang</strong>, Hongru Wang, Yi Chen, Boyang Xue, Tianqing Fang, Zhisong Zhang, Hongming Zhang, Haitao Mi, Dong Yu, Kam-Fai Wong</p>
-          <p class="publication-venue">ACL 2026 (Main)</p>
-        </div>
+        <section id="news">
+          <h2>News</h2>
+          <ul class="news-list">
+            <li><strong>[May 2026]</strong> <strong><a href="https://arxiv.org/pdf/2605.23898" target="_blank" rel="noopener noreferrer">SpaceNum</a></strong> was released, revisiting spatial-numerical understanding in VLMs.</li>
+            <li><strong>[May 2026]</strong> <strong><a href="https://arxiv.org/pdf/2601.15224" target="_blank" rel="noopener noreferrer">ProgressLM</a></strong> was selected as <span class="highlight-red">Oral</span> in ACL 2026.</li>
+            <li><strong>[May 2026]</strong> I was selected as a <strong>Silver Reviewer</strong> in ICML 2026.</li>
+            <li><strong>[Apr 2026]</strong> <strong><a href="https://arxiv.org/pdf/2510.01586" target="_blank" rel="noopener noreferrer">AdvEvo-MARL</a></strong> was accepted to <strong>ICML 2026</strong>.</li>
+            <li><strong>[Apr 2026]</strong> <strong><a href="https://arxiv.org/pdf/2601.15224" target="_blank" rel="noopener noreferrer">ProgressLM</a></strong> and <strong><a href="https://arxiv.org/pdf/2510.14438" target="_blank" rel="noopener noreferrer">COREWeaver</a></strong> were accepted to <strong>ACL 2026 (Main)</strong>.</li>
+          </ul>
 
+          <details class="news-more">
+            <summary>Show more</summary>
+            <ul>
+              <li><strong>[Jan 2026]</strong> <strong><a href="https://arxiv.org/pdf/2506.21458" target="_blank" rel="noopener noreferrer">MindCube</a></strong> was accepted to <strong>ICLR 2026</strong>.</li>
+              <li><strong>[Jan 2026]</strong> <strong><a href="https://arxiv.org/pdf/2601.15224" target="_blank" rel="noopener noreferrer">ProgressLM</a></strong> was released, probing how well VLMs reason in progress.</li>
+              <li><strong>[Sep 2025]</strong> Honored to receive <strong>McCormick School of Engineering Fellowship</strong> from Northwestern University.</li>
+              <li><strong>[Sep 2025]</strong> Joined <strong>Northwestern University</strong> as a Ph.D. student in Computer Science.</li>
+              <li><strong>[Aug 2025]</strong> <strong><a href="https://arxiv.org/pdf/2508.03864" target="_blank" rel="noopener noreferrer">Evo-MARL</a></strong> and <strong><a href="https://arxiv.org/pdf/2507.23067" target="_blank" rel="noopener noreferrer">FairReason</a></strong> were accepted to <strong>T2FM@ICCV 2025</strong>.</li>
+              <li><strong>[Aug 2025]</strong> <strong><a href="https://arxiv.org/pdf/2505.20013" target="_blank" rel="noopener noreferrer">WebCoT</a></strong> was accepted to <strong>EMNLP 2025 (Findings)</strong> and <strong>AIA@COLM 2025</strong>.</li>
+              <li><strong>[Jun 2025]</strong> <strong><a href="https://openaccess.thecvf.com/content/ICCV2025/papers/Lee_MultiVerse_A_Multi-Turn_Conversation_Benchmark_for_Evaluating_Large_Vision_and_ICCV_2025_paper.pdf" target="_blank" rel="noopener noreferrer">MultiVerse</a></strong> was accepted to <strong>ICCV 2025</strong>.</li>
+              <li><strong>[Jun 2025]</strong> Graduated with a B.E. degree and selected as <strong>Outstanding Undergraduate</strong>.</li>
+              <li><strong>[May 2025]</strong> <strong><a href="https://aclanthology.org/2025.acl-long.372.pdf" target="_blank" rel="noopener noreferrer">VLM2-Bench</a></strong> was accepted to <strong>ACL 2025 (Main)</strong>, and <strong><a href="https://aclanthology.org/2025.findings-acl.567.pdf" target="_blank" rel="noopener noreferrer">Bridge-Coder</a></strong> to <strong>ACL 2025 (Findings)</strong>.</li>
+              <li><strong>[May 2025]</strong> Honored with the <strong>Lei Jun Computer Breakthrough Award</strong> (50K RMB).</li>
+              <li><strong>[May 2025]</strong> <strong><a href="https://raw.githubusercontent.com/mlresearch/v267/main/assets/rong25a/rong25a.pdf" target="_blank" rel="noopener noreferrer">CAN</a></strong> was accepted to <strong>ICML 2025</strong>.</li>
+              <li><strong>[Jan 2025]</strong> <strong><a href="https://proceedings.iclr.cc/paper_files/paper/2025/file/6b69dcf999ee89f48d08c6c9881a4c0d-Paper-Conference.pdf" target="_blank" rel="noopener noreferrer">PVIT</a></strong> was accepted to <strong>ICLR 2025</strong>.</li>
+              <li><strong>[Nov 2024]</strong> PVIT-3M dataset ranked Top 3 in downloads on Hugging Face.</li>
+              <li><strong>[Oct 2024]</strong> Awarded the <strong>National Scholarship</strong> (top 0.2% nationally).</li>
+              <li><strong>[Sep 2024]</strong> <strong><a href="https://proceedings.neurips.cc/paper_files/paper/2024/file/c37d94c04effc86d72ab2258ba9b76c7-Paper-Datasets_and_Benchmarks_Track.pdf" target="_blank" rel="noopener noreferrer">Image Textualization</a></strong> accepted to <strong>NeurIPS 2024 (D&amp;B)</strong>.</li>
+              <li><strong>[Sep 2024]</strong> <strong><a href="https://arxiv.org/pdf/2401.02906" target="_blank" rel="noopener noreferrer">MLLM-Protector</a></strong> and <strong><a href="https://arxiv.org/pdf/2408.12168" target="_blank" rel="noopener noreferrer">FIRST</a></strong> accepted to <strong>EMNLP 2024 (Main)</strong>.</li>
+              <li><strong>[Mar 2024]</strong> <strong><a href="https://arxiv.org/pdf/2402.01348" target="_blank" rel="noopener noreferrer">CORE</a></strong> accepted to <strong>CogSci 2024</strong> (<span class="highlight-red">Oral</span>).</li>
+              <li><strong>[Dec 2023]</strong> <strong><a href="https://arxiv.org/pdf/2309.05274" target="_blank" rel="noopener noreferrer">FuzzLLM</a></strong> accepted to <strong>ICASSP 2024</strong>.</li>
+            </ul>
+          </details>
+        </section>
 
-        <div class="publication-entry">
-          <p class="publication-title"><a href="https://iccv.thecvf.com/virtual/2025/poster/1382">MultiVerse: A Multi-Turn Conversation Benchmark for Evaluating Large Vision and Language Models</a></p>
-          <p class="publication-authors">Young-Jun Lee, Byung-Kwan Lee, <strong>Jianshu Zhang</strong>, Yechan Hwang, Byungsoo Ko, Han-Gyu Kim, Dongyu Yao, Xuankun Rong, Eojin Joo, Seung-Ho Han, Bowon Ko, Ho-Jin Choi</p>
-          <p class="publication-venue">ICCV 2025; ICCV 2025 Workshop KnowledgeMR</p>
-        </div>
-        
-        <div class="publication-entry">
-          <p class="publication-title"><a href="https://arxiv.org/abs/2410.07113">Personalized Visual Instruction Tuning</a></p>
-          <p class="publication-authors">Renjie Pi*, <strong>Jianshu Zhang*</strong>, Tianyang Han, Jipeng Zhang, Rui Pan, Tong Zhang</p>
-          <p class="publication-venue">ICLR 2025</p>
-        </div>
+        <section id="publications">
+          <h2>Publications</h2>
+          <div class="year-index" aria-label="Publication years">
+            <a href="#year-2026">2026 (7)</a>
+            <a href="#year-2025">2025 (7)</a>
+            <a href="#year-2024">2024 (5)</a>
+          </div>
 
-        <div class="publication-entry">
-          <p class="publication-title"><a href="https://arxiv.org/abs/2505.20013">WebCoT: Enhancing Web Agent Reasoning by Reconstructing Chain-of-Thought in Reflection, Branching, and Rollback</a></p>
-          <p class="publication-authors">Minda Hu, Tianqing Fang, <strong>Jianshu Zhang</strong>, Junyu Ma, Zhisong Zhang, Jingyan Zhou, Hongming Zhang, Haitao Mi, Dong Yu, Irwin King</p>
-          <p class="publication-venue">EMNLP 2025 (Findings); COLM 2025 Workshop AIA</p>
-        </div>
+          <div class="publications">
+            <h3 class="year" id="year-2026">2026</h3>
+            <ol class="bibliography">
 
-        <div class="publication-entry">
-          <p class="publication-title"><a href="https://scholar.google.com/scholar?cluster=16443504121916289833&amp;hl=en&amp;oi=scholarr">CAN: Leveraging Clients as Navigators for Generative Replay in Federated Continual Learning</a></p>
-          <p class="publication-authors">Xuankun Rong*, <strong>Jianshu Zhang</strong>*, He Kun, Mang Ye</p>
-          <p class="publication-venue">ICML 2025</p>
-        </div>
+              <li>
+                <div class="pub-row">
+                  <div class="abbr">
+                    <img src="images/paper/spacenum.png" alt="SpaceNum teaser" class="teaser">
+                    <abbr class="badge">New</abbr>
+                  </div>
+                  <div class="pub-content">
+                    <div class="publication-title"><a href="https://arxiv.org/pdf/2605.23898" target="_blank" rel="noopener noreferrer">SpaceNum: Revisiting Spatial Numerical Understanding in VLMs</a></div>
+                    <div class="publication-authors"><strong>Jianshu Zhang*</strong>, Yijiang Li*, Huifeixin Chen, Haoran Lu, Letian Xue, Bingyang Wang, Han Liu</div>
+                    <div class="publication-venue">New Released</div>
+                    <div class="links">
+                      <a class="btn" href="https://arxiv.org/pdf/2605.23898" target="_blank" rel="noopener noreferrer">PDF</a>
+                      <a class="btn" href="https://sterzhang.github.io/SpaceNum-Home/" target="_blank" rel="noopener noreferrer">Project Page</a>
+                    </div>
+                  </div>
+                </div>
+              </li>
 
-        <div class="publication-entry">
-          <p class="publication-title"><a href="https://aclanthology.org/2025.findings-acl.567/">Bridge-Coder: Transferring Model Capabilities from High-Resource to Low-Resource Programming Language</a></p>
-          <p class="publication-authors">Jipeng Zhang*, <strong>Jianshu Zhang*</strong>, Yuanzhe Li*, Renjie Pi, Rui Pan, Runtao Liu, Zheng Ziqiang, Tong Zhang</p>
-          <p class="publication-venue">ACL 2025 (Findings)</p>
-        </div>
+              <li>
+                <div class="pub-row">
+                  <div class="abbr">
+                    <img src="images/paper/progresslm.png" alt="ProgressLM teaser" class="teaser">
+                    <abbr class="badge">ACL</abbr>
+                  </div>
+                  <div class="pub-content">
+                    <div class="publication-title"><a href="https://arxiv.org/pdf/2601.15224" target="_blank" rel="noopener noreferrer">PROGRESSLM: Towards Progress Reasoning in Vision-Language Models</a></div>
+                    <div class="publication-authors"><strong>Jianshu Zhang*</strong>, Chengxuan Qian*, Haosen Sun, Haoran Lu, Dingcheng Wang, Letian Xue, Han Liu</div>
+                    <div class="publication-venue">ACL 2026 (Main); ICLR 2026 Workshop on World Models</div>
+                    <div class="publication-note">Oral</div>
+                    <div class="links">
+                      <a class="btn" href="https://arxiv.org/pdf/2601.15224" target="_blank" rel="noopener noreferrer">PDF</a>
+                      <a class="btn" href="https://progresslm.github.io/ProgressLM/" target="_blank" rel="noopener noreferrer">Project Page</a>
+                    </div>
+                  </div>
+                </div>
+              </li>
 
-        <div class="publication-entry">
-          <p class="publication-title"><a href="https://arxiv.org/abs/2406.07502">Image Textualization: An Automatic Framework for Creating Accurate and Detailed Image Descriptions</a></p>
-          <p class="publication-authors">Renjie Pi*, <strong>Jianshu Zhang*</strong>, Jipeng Zhang, Rui Pan, Zhekai Chen, Tong Zhang</p>
-          <p class="publication-venue">NeurIPS 2024</p>
-        </div>
+              <li>
+                <div class="pub-row">
+                  <div class="abbr">
+                    <img src="images/paper/mindcube.png" alt="MindCube teaser" class="teaser">
+                    <abbr class="badge">ICLR</abbr>
+                  </div>
+                  <div class="pub-content">
+                    <div class="publication-title"><a href="https://arxiv.org/abs/2506.21458" target="_blank" rel="noopener noreferrer">Spatial Mental Modeling from Limited Views</a></div>
+                    <div class="publication-authors">Baiqiao Yin, Qineng Wang, Pingyue Zhang, <strong>Jianshu Zhang</strong>, Kangrui Wang, Zihan Wang, Jieyu Zhang, Keshigeyan Chandrasegaran, Han Liu, Ranjay Krishna, Saining Xie, Manling Li, Jiajun Wu, Li Fei-Fei</div>
+                    <div class="publication-venue">ICLR 2026; ICCV 2025 Workshop SP4V</div>
+                    <div class="publication-note">Best Paper Award</div>
+                    <div class="links">
+                      <a class="btn" href="https://arxiv.org/abs/2506.21458" target="_blank" rel="noopener noreferrer">Paper</a>
+                    </div>
+                  </div>
+                </div>
+              </li>
 
-        <div class="publication-entry">
-          <p class="publication-title"><a href="https://arxiv.org/abs/2401.02906">MLLM-Protector: Ensuring MLLM&#39;s Safety without Hurting Performance</a></p>
-          <p class="publication-authors">Renjie Pi*, Tianyang Han*, <strong>Jianshu Zhang*</strong>, Yueqi Xie, Rui Pan, Qing Lian, Hanze Dong, Jipeng Zhang, Tong Zhang</p>
-          <p class="publication-venue">EMNLP 2024 (Main)</p>
-        </div>
+              <li>
+                <div class="pub-row">
+                  <div class="abbr">
+                    <img src="images/paper/coreweaver.png" alt="Explore to Evolve teaser" class="teaser">
+                    <abbr class="badge">ACL</abbr>
+                  </div>
+                  <div class="pub-content">
+                    <div class="publication-title"><a href="https://arxiv.org/abs/2510.14438" target="_blank" rel="noopener noreferrer">Explore to Evolve: Scaling Evolved Aggregation Logic via Proactive Online Exploration for Deep Research Agents</a></div>
+                    <div class="publication-authors">Rui Wang, Ce Zhang, Jun-Yu Ma, <strong>Jianshu Zhang</strong>, Hongru Wang, Yi Chen, Boyang Xue, Tianqing Fang, Zhisong Zhang, Hongming Zhang, Haitao Mi, Dong Yu, Kam-Fai Wong</div>
+                    <div class="publication-venue">ACL 2026 (Main)</div>
+                    <div class="links">
+                      <a class="btn" href="https://arxiv.org/pdf/2510.14438" target="_blank" rel="noopener noreferrer">PDF</a>
+                    </div>
+                  </div>
+                </div>
+              </li>
 
-        <div class="publication-entry">
-          <p class="publication-title"><a href="https://ieeexplore.ieee.org/document/10448041">FuzzLLM: A Novel and Universal Fuzzing Framework for Proactively Discovering Jailbreak Vulnerabilities in Large Language Models</a></p>
-          <p class="publication-authors">Dongyu Yao*, <strong>Jianshu Zhang*</strong>, Ian G. Harris, Marcel Carlsson</p>
-          <p class="publication-venue">ICASSP 2024; Presented at ShmooCon 2024 (a top-tier American hacker convention)</p>
-        </div>
+              <li>
+                <div class="pub-row">
+                  <div class="abbr">
+                    <img src="images/paper/advevo-marl.png" alt="AdvEvo-MARL teaser" class="teaser">
+                    <abbr class="badge">ICML</abbr>
+                  </div>
+                  <div class="pub-content">
+                    <div class="publication-title"><a href="https://arxiv.org/abs/2510.01586" target="_blank" rel="noopener noreferrer">AdvEvo-MARL: Shaping Internalized Safety through Adversarial Co-Evolution in Multi-Agent Reinforcement Learning</a></div>
+                    <div class="publication-authors">Zhenyu Pan, Yiting Zhang, Zhuo Liu, Yolo Yunlong Tang, Zeliang Zhang, Haozheng Luo, Yuwei Han, <strong>Jianshu Zhang</strong>, Dennis Wu, Hong-Yu Chen, Haoran Lu, Haoyang Fang, Manling Li, Chenliang Xu, Philip S. Yu, Han Liu</div>
+                    <div class="publication-venue">ICML 2026</div>
+                    <div class="links">
+                      <a class="btn" href="https://arxiv.org/abs/2510.01586" target="_blank" rel="noopener noreferrer">Paper</a>
+                      <a class="btn" href="https://arxiv.org/pdf/2510.01586" target="_blank" rel="noopener noreferrer">PDF</a>
+                    </div>
+                  </div>
+                </div>
+              </li>
 
-        <div class="publication-entry">
-          <p class="publication-title"><a href="https://arxiv.org/abs/2408.12168">FIRST: Teach A Reliable Large Language Model Through Efficient Trustworthy Distillation</a></p>
-          <p class="publication-authors">KaShun Shum*, Minrui Xu*, <strong>Jianshu Zhang*</strong>, Zixin Chen, Shizhe Diao, Hanze Dong, Jipeng Zhang, Muhammad Omer Raza</p>
-          <p class="publication-venue">EMNLP 2024 (Main)</p>
-        </div>
+              <li>
+                <div class="pub-row">
+                  <div class="abbr">
+                    <img src="images/paper/magicsim.png" alt="MagicSim teaser" class="teaser">
+                    <abbr class="badge">arXiv</abbr>
+                  </div>
+                  <div class="pub-content">
+                    <div class="publication-title"><a href="https://arxiv.org/abs/2606.17511" target="_blank" rel="noopener noreferrer">MagicSim: A Unified Infrastructure for Executable Embodied Interaction</a></div>
+                    <div class="publication-authors">Haoran Lu, Songling Liu, Yue Chen, Guo Ye, Mutian Shen, Shuyang Yu, Yu Xiao, Jihai Zhao, Shang Wu, <strong>Jianshu Zhang</strong>, Xiangtian Gui, Chuye Hong, Yuran Wang, Maojiang Su, Jiayi Wang, Ruihai Wu, Zhaoran Wang, Han Liu</div>
+                    <div class="publication-venue">arXiv preprint arXiv:2606.17511</div>
+                    <div class="links">
+                      <a class="btn" href="https://arxiv.org/abs/2606.17511" target="_blank" rel="noopener noreferrer">Paper</a>
+                      <a class="btn" href="https://arxiv.org/pdf/2606.17511" target="_blank" rel="noopener noreferrer">PDF</a>
+                    </div>
+                  </div>
+                </div>
+              </li>
 
-        <div class="publication-entry">
-          <p class="publication-title"><a href="https://arxiv.org/abs/2402.01348">CORE: Mitigating Catastrophic Forgetting in Continual Learning through Cognitive Replay</a></p>
-          <p class="publication-authors"><strong>Jianshu Zhang*</strong>, Yankai Fu*, Ziheng Peng*, Dongyu Yao, Kun He</p>
-          <p class="publication-venue">CogSci 2024 (<strong class="highlight-red">Oral</strong>)</p>
-        </div>
+              <li>
+                <div class="pub-row">
+                  <div class="abbr">
+                    <img src="images/paper/phys4d.png" alt="Phys4D teaser" class="teaser">
+                    <abbr class="badge">arXiv</abbr>
+                  </div>
+                  <div class="pub-content">
+                    <div class="publication-title"><a href="https://arxiv.org/abs/2603.03485" target="_blank" rel="noopener noreferrer">Phys4D: Fine-Grained Physics-Consistent 4D Modeling from Video Diffusion</a></div>
+                    <div class="publication-authors">Haoran Lu, Shang Wu, Songling Liu, <strong>Jianshu Zhang</strong>, Maojiang Su, Guo Ye, Chenwei Xu, Lie Lu, Pranav Maneriker, Fan Du, Manling Li, Zhaoran Wang, Han Liu</div>
+                    <div class="publication-venue">arXiv preprint arXiv:2603.03485</div>
+                    <div class="links">
+                      <a class="btn" href="https://arxiv.org/abs/2603.03485" target="_blank" rel="noopener noreferrer">Paper</a>
+                      <a class="btn" href="https://arxiv.org/pdf/2603.03485" target="_blank" rel="noopener noreferrer">PDF</a>
+                    </div>
+                  </div>
+                </div>
+              </li>
 
-      </article>
+            </ol>
 
-      <article id="awards">
-        <h2>Awards</h2>
-        <ul>
-          <li><strong>McCormick School of Engineering Fellowship (~46K USD)</strong></li>
-          <li><strong>National Scholarship</strong></li>
-          <li><strong>Lei Jun Computer Breakthrough Award</strong> (50K RMB)</li>
-          <li><strong>Outstanding Undergraduate</strong></li>
-          <li><strong>First-Class Scholarship</strong> (ranked 1st)</li>
-          <li><strong>Merit Student</strong></li>
-        </ul>
-      </article>
+            <h3 class="year" id="year-2025">2025</h3>
+            <ol class="bibliography">
 
-      <article id="education">
-        <h2>Education</h2>
-        <ul>
-          <li><strong>Northwestern University</strong>, Ph.D. in Computer Science (2025 – 2030)</li>
-          <li><strong>Wuhan University</strong> (2021 – 2025)</li>
-          <li><strong>Shenzhen Middle School</strong> (2018 – 2021)</li>
-        </ul>
-      </article>
+              <li>
+                <div class="pub-row">
+                  <div class="abbr">
+                    <img src="images/paper/vlm2-bench.png" alt="VLM2-Bench teaser" class="teaser">
+                    <abbr class="badge">ACL</abbr>
+                  </div>
+                  <div class="pub-content">
+                    <div class="publication-title"><a href="https://arxiv.org/abs/2502.12084" target="_blank" rel="noopener noreferrer">VLM2-Bench: A Closer Look at How Well VLMs Implicitly Link Explicit Matching Visual Cues</a></div>
+                    <div class="publication-authors"><strong>Jianshu Zhang*</strong>, Dongyu Yao*, Renjie Pi, Paul Pu Liang, Yiren Fung</div>
+                    <div class="publication-venue">ACL 2025 (Main)</div>
+                    <div class="links">
+                      <a class="btn" href="https://arxiv.org/abs/2502.12084" target="_blank" rel="noopener noreferrer">Paper</a>
+                    </div>
+                  </div>
+                </div>
+              </li>
 
-    </section>
+              <li>
+                <div class="pub-row">
+                  <div class="abbr">
+                    <img src="images/paper/multiverse.png" alt="MultiVerse teaser" class="teaser">
+                    <abbr class="badge">ICCV</abbr>
+                  </div>
+                  <div class="pub-content">
+                    <div class="publication-title"><a href="https://iccv.thecvf.com/virtual/2025/poster/1382" target="_blank" rel="noopener noreferrer">MultiVerse: A Multi-Turn Conversation Benchmark for Evaluating Large Vision and Language Models</a></div>
+                    <div class="publication-authors">Young-Jun Lee, Byung-Kwan Lee, <strong>Jianshu Zhang</strong>, Yechan Hwang, Byungsoo Ko, Han-Gyu Kim, Dongyu Yao, Xuankun Rong, Eojin Joo, Seung-Ho Han, Bowon Ko, Ho-Jin Choi</div>
+                    <div class="publication-venue">ICCV 2025; ICCV 2025 Workshop KnowledgeMR</div>
+                    <div class="links">
+                      <a class="btn" href="https://iccv.thecvf.com/virtual/2025/poster/1382" target="_blank" rel="noopener noreferrer">Paper</a>
+                    </div>
+                  </div>
+                </div>
+              </li>
+
+              <li>
+                <div class="pub-row">
+                  <div class="abbr">
+                    <img src="images/paper/pvit.png" alt="Personalized Visual Instruction Tuning teaser" class="teaser">
+                    <abbr class="badge">ICLR</abbr>
+                  </div>
+                  <div class="pub-content">
+                    <div class="publication-title"><a href="https://arxiv.org/abs/2410.07113" target="_blank" rel="noopener noreferrer">Personalized Visual Instruction Tuning</a></div>
+                    <div class="publication-authors">Renjie Pi*, <strong>Jianshu Zhang*</strong>, Tianyang Han, Jipeng Zhang, Rui Pan, Tong Zhang</div>
+                    <div class="publication-venue">ICLR 2025</div>
+                    <div class="links">
+                      <a class="btn" href="https://arxiv.org/abs/2410.07113" target="_blank" rel="noopener noreferrer">Paper</a>
+                    </div>
+                  </div>
+                </div>
+              </li>
+
+              <li>
+                <div class="pub-row">
+                  <div class="abbr">
+                    <img src="images/paper/webcot.png" alt="WebCoT teaser" class="teaser">
+                    <abbr class="badge">EMNLP</abbr>
+                  </div>
+                  <div class="pub-content">
+                    <div class="publication-title"><a href="https://arxiv.org/abs/2505.20013" target="_blank" rel="noopener noreferrer">WebCoT: Enhancing Web Agent Reasoning by Reconstructing Chain-of-Thought in Reflection, Branching, and Rollback</a></div>
+                    <div class="publication-authors">Minda Hu, Tianqing Fang, <strong>Jianshu Zhang</strong>, Junyu Ma, Zhisong Zhang, Jingyan Zhou, Hongming Zhang, Haitao Mi, Dong Yu, Irwin King</div>
+                    <div class="publication-venue">EMNLP 2025 (Findings); COLM 2025 Workshop AIA</div>
+                    <div class="links">
+                      <a class="btn" href="https://arxiv.org/abs/2505.20013" target="_blank" rel="noopener noreferrer">Paper</a>
+                    </div>
+                  </div>
+                </div>
+              </li>
+
+              <li>
+                <div class="pub-row">
+                  <div class="abbr">
+                    <img src="images/paper/fairreason.png" alt="FairReason teaser" class="teaser">
+                    <abbr class="badge">arXiv</abbr>
+                  </div>
+                  <div class="pub-content">
+                    <div class="publication-title"><a href="https://arxiv.org/abs/2507.23067" target="_blank" rel="noopener noreferrer">FairReason: Balancing Reasoning and Social Bias in MLLMs</a></div>
+                    <div class="publication-authors">Zhenyu Pan, Yutong Zhang, <strong>Jianshu Zhang</strong>, Haoran Lu, Haozheng Luo, Yuwei Han, Philip S. Yu, Manling Li, Han Liu</div>
+                    <div class="publication-venue">arXiv preprint arXiv:2507.23067</div>
+                    <div class="links">
+                      <a class="btn" href="https://arxiv.org/abs/2507.23067" target="_blank" rel="noopener noreferrer">Paper</a>
+                      <a class="btn" href="https://arxiv.org/pdf/2507.23067" target="_blank" rel="noopener noreferrer">PDF</a>
+                    </div>
+                  </div>
+                </div>
+              </li>
+
+              <li>
+                <div class="pub-row">
+                  <div class="abbr">
+                    <img src="images/paper/can.png" alt="CAN teaser" class="teaser">
+                    <abbr class="badge">ICML</abbr>
+                  </div>
+                  <div class="pub-content">
+                    <div class="publication-title"><a href="https://scholar.google.com/scholar?cluster=16443504121916289833&amp;hl=en&amp;oi=scholarr" target="_blank" rel="noopener noreferrer">CAN: Leveraging Clients as Navigators for Generative Replay in Federated Continual Learning</a></div>
+                    <div class="publication-authors">Xuankun Rong*, <strong>Jianshu Zhang*</strong>, He Kun, Mang Ye</div>
+                    <div class="publication-venue">ICML 2025</div>
+                    <div class="links">
+                      <a class="btn" href="https://scholar.google.com/scholar?cluster=16443504121916289833&amp;hl=en&amp;oi=scholarr" target="_blank" rel="noopener noreferrer">Paper</a>
+                    </div>
+                  </div>
+                </div>
+              </li>
+
+              <li>
+                <div class="pub-row">
+                  <div class="abbr">
+                    <img src="images/paper/bridge-coder.png" alt="Bridge-Coder teaser" class="teaser">
+                    <abbr class="badge">ACL</abbr>
+                  </div>
+                  <div class="pub-content">
+                    <div class="publication-title"><a href="https://aclanthology.org/2025.findings-acl.567/" target="_blank" rel="noopener noreferrer">Bridge-Coder: Transferring Model Capabilities from High-Resource to Low-Resource Programming Language</a></div>
+                    <div class="publication-authors">Jipeng Zhang*, <strong>Jianshu Zhang*</strong>, Yuanzhe Li*, Renjie Pi, Rui Pan, Runtao Liu, Zheng Ziqiang, Tong Zhang</div>
+                    <div class="publication-venue">ACL 2025 (Findings)</div>
+                    <div class="links">
+                      <a class="btn" href="https://aclanthology.org/2025.findings-acl.567/" target="_blank" rel="noopener noreferrer">Paper</a>
+                    </div>
+                  </div>
+                </div>
+              </li>
+
+            </ol>
+
+            <h3 class="year" id="year-2024">2024</h3>
+            <ol class="bibliography">
+
+              <li>
+                <div class="pub-row">
+                  <div class="abbr">
+                    <img src="images/paper/it.png" alt="Image Textualization teaser" class="teaser">
+                    <abbr class="badge">NeurIPS</abbr>
+                  </div>
+                  <div class="pub-content">
+                    <div class="publication-title"><a href="https://arxiv.org/abs/2406.07502" target="_blank" rel="noopener noreferrer">Image Textualization: An Automatic Framework for Creating Accurate and Detailed Image Descriptions</a></div>
+                    <div class="publication-authors">Renjie Pi*, <strong>Jianshu Zhang*</strong>, Jipeng Zhang, Rui Pan, Zhekai Chen, Tong Zhang</div>
+                    <div class="publication-venue">NeurIPS 2024</div>
+                    <div class="links">
+                      <a class="btn" href="https://arxiv.org/abs/2406.07502" target="_blank" rel="noopener noreferrer">Paper</a>
+                    </div>
+                  </div>
+                </div>
+              </li>
+
+              <li>
+                <div class="pub-row">
+                  <div class="abbr">
+                    <img src="images/paper/mllm-protector.png" alt="MLLM-Protector teaser" class="teaser">
+                    <abbr class="badge">EMNLP</abbr>
+                  </div>
+                  <div class="pub-content">
+                    <div class="publication-title"><a href="https://arxiv.org/abs/2401.02906" target="_blank" rel="noopener noreferrer">MLLM-Protector: Ensuring MLLM's Safety without Hurting Performance</a></div>
+                    <div class="publication-authors">Renjie Pi*, Tianyang Han*, <strong>Jianshu Zhang*</strong>, Yueqi Xie, Rui Pan, Qing Lian, Hanze Dong, Jipeng Zhang, Tong Zhang</div>
+                    <div class="publication-venue">EMNLP 2024 (Main)</div>
+                    <div class="links">
+                      <a class="btn" href="https://arxiv.org/abs/2401.02906" target="_blank" rel="noopener noreferrer">Paper</a>
+                    </div>
+                  </div>
+                </div>
+              </li>
+
+              <li>
+                <div class="pub-row">
+                  <div class="abbr">
+                    <img src="images/paper/fuzzllm.png" alt="FuzzLLM teaser" class="teaser">
+                    <abbr class="badge">ICASSP</abbr>
+                  </div>
+                  <div class="pub-content">
+                    <div class="publication-title"><a href="https://ieeexplore.ieee.org/document/10448041" target="_blank" rel="noopener noreferrer">FuzzLLM: A Novel and Universal Fuzzing Framework for Proactively Discovering Jailbreak Vulnerabilities in Large Language Models</a></div>
+                    <div class="publication-authors">Dongyu Yao*, <strong>Jianshu Zhang*</strong>, Ian G. Harris, Marcel Carlsson</div>
+                    <div class="publication-venue">ICASSP 2024; Presented at ShmooCon 2024</div>
+                    <div class="links">
+                      <a class="btn" href="https://ieeexplore.ieee.org/document/10448041" target="_blank" rel="noopener noreferrer">Paper</a>
+                    </div>
+                  </div>
+                </div>
+              </li>
+
+              <li>
+                <div class="pub-row">
+                  <div class="abbr">
+                    <img src="images/paper/first.png" alt="FIRST teaser" class="teaser">
+                    <abbr class="badge">EMNLP</abbr>
+                  </div>
+                  <div class="pub-content">
+                    <div class="publication-title"><a href="https://arxiv.org/abs/2408.12168" target="_blank" rel="noopener noreferrer">FIRST: Teach A Reliable Large Language Model Through Efficient Trustworthy Distillation</a></div>
+                    <div class="publication-authors">KaShun Shum*, Minrui Xu*, <strong>Jianshu Zhang*</strong>, Zixin Chen, Shizhe Diao, Hanze Dong, Jipeng Zhang, Muhammad Omer Raza</div>
+                    <div class="publication-venue">EMNLP 2024 (Main)</div>
+                    <div class="links">
+                      <a class="btn" href="https://arxiv.org/abs/2408.12168" target="_blank" rel="noopener noreferrer">Paper</a>
+                    </div>
+                  </div>
+                </div>
+              </li>
+
+              <li>
+                <div class="pub-row">
+                  <div class="abbr">
+                    <img src="images/paper/core.png" alt="CORE teaser" class="teaser">
+                    <abbr class="badge">CogSci</abbr>
+                  </div>
+                  <div class="pub-content">
+                    <div class="publication-title"><a href="https://arxiv.org/abs/2402.01348" target="_blank" rel="noopener noreferrer">CORE: Mitigating Catastrophic Forgetting in Continual Learning through Cognitive Replay</a></div>
+                    <div class="publication-authors"><strong>Jianshu Zhang*</strong>, Yankai Fu*, Ziheng Peng*, Dongyu Yao, Kun He</div>
+                    <div class="publication-venue">CogSci 2024</div>
+                    <div class="publication-note">Oral</div>
+                    <div class="links">
+                      <a class="btn" href="https://arxiv.org/abs/2402.01348" target="_blank" rel="noopener noreferrer">Paper</a>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ol>
+          </div>
+        </section>
+
+        <section id="awards">
+          <h2>Awards</h2>
+          <ul class="compact-list">
+            <li><strong>McCormick School of Engineering Fellowship</strong> (~46K USD)</li>
+            <li><strong>National Scholarship</strong></li>
+            <li><strong>Lei Jun Computer Breakthrough Award</strong> (50K RMB)</li>
+            <li><strong>Outstanding Undergraduate</strong></li>
+            <li><strong>First-Class Scholarship</strong> (ranked 1st)</li>
+            <li><strong>Merit Student</strong></li>
+          </ul>
+        </section>
+
+        <section id="education">
+          <h2>Education</h2>
+          <ul class="compact-list">
+            <li><strong>Northwestern University</strong>, Ph.D. in Computer Science (2025-2030)</li>
+            <li><strong>Wuhan University</strong> (2021-2025)</li>
+            <li><strong>Shenzhen Middle School</strong> (2018-2021)</li>
+          </ul>
+        </section>
+
+        <footer>
+          <small>Inspired by the Minimal Light academic homepage style.</small>
+        </footer>
+      </main>
     </div>
+
+    <script>
+      const themeToggle = document.querySelector(".theme-toggle");
+
+      const syncThemeToggle = () => {
+        const isDark = document.documentElement.dataset.theme === "dark";
+        themeToggle.setAttribute("aria-pressed", String(isDark));
+        themeToggle.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
+        themeToggle.setAttribute("title", isDark ? "Switch to light mode" : "Switch to dark mode");
+      };
+
+      themeToggle.addEventListener("click", () => {
+        const nextTheme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+        document.documentElement.dataset.theme = nextTheme;
+        try {
+          localStorage.setItem("theme", nextTheme);
+        } catch {}
+        syncThemeToggle();
+      });
+
+      syncThemeToggle();
+
+      const navLinks = Array.from(document.querySelectorAll(".site-nav a"));
+      const sections = navLinks
+        .map((link) => document.querySelector(link.getAttribute("href")))
+        .filter(Boolean);
+
+      if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            const visible = entries
+              .filter((entry) => entry.isIntersecting)
+              .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+            if (!visible) return;
+
+            navLinks.forEach((link) => {
+              link.classList.toggle("active", link.getAttribute("href") === `#${visible.target.id}`);
+            });
+          },
+          { rootMargin: "-18% 0px -68% 0px", threshold: [0, 0.25, 0.5, 0.75] }
+        );
+
+        sections.forEach((section) => observer.observe(section));
+      }
+    </script>
   </body>
 </html>
