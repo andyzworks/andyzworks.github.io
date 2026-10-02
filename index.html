@@ -533,6 +533,14 @@
         color: var(--link-hover);
       }
 
+      .btn-disabled,
+      .btn-disabled:hover {
+        opacity: 0.55;
+        cursor: default;
+        border-color: var(--strong);
+        color: var(--strong);
+      }
+
       .compact-list {
         margin-top: -0.25rem;
       }
@@ -755,7 +763,7 @@
                     <div class="links">
                       <a class="btn" href="https://arxiv.org/pdf/2609.36684" target="_blank" rel="noopener noreferrer">PDF</a>
                       <a class="btn" href="https://andyzworks.github.io/progresscompass/" target="_blank" rel="noopener noreferrer">Project Page</a>
-                      <a class="btn" href="https://github.com/andyzworks/progresscompass" target="_blank" rel="noopener noreferrer">Code</a>
+                      <span class="btn btn-disabled" aria-disabled="true" title="Code coming soon">Code (coming soon)</span>
                       <a class="btn" href="https://andyzworks.github.io/progresscompass/#video" target="_blank" rel="noopener noreferrer">Video</a>
                     </div>
                   </div>
